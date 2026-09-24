@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`painel-norte-rios.html` is a single self-contained HTML file: a personal work-execution dashboard ("Painel Pessoal — Norte Rios") for tracking weekly/monthly/quarterly deliverables, a PDI (individual development plan), a delivery map, indicators, and a ranking of work fronts. There is no build step, no package manager, no dependencies to install — it's one file with inline `<style>` and `<script>` blocks, vanilla JS/DOM (no framework), rendered by hand-written `render*()` functions that write `innerHTML` into `<section class="panel" id="panel-*">` targets.
+`index.html` is a single self-contained HTML file: a personal work-execution dashboard ("Painel Pessoal — Norte Rios") for tracking weekly/monthly/quarterly deliverables, a PDI (individual development plan), a delivery map, indicators, and a ranking of work fronts. There is no build step, no package manager, no dependencies to install — it's one file with inline `<style>` and `<script>` blocks, vanilla JS/DOM (no framework), rendered by hand-written `render*()` functions that write `innerHTML` into `<section class="panel" id="panel-*">` targets.
+
+`login.html` is a second, much smaller standalone HTML file: an email-only login gate in front of `index.html` (see "Login gate" below).
 
 There is no test suite, linter, or build tooling in this repo. To "run" the app, just open the HTML file in a browser (or use the `run` skill, which will look for how to launch it).
 
@@ -31,6 +33,15 @@ There is no test suite, linter, or build tooling in this repo. To "run" the app,
 - `loadInitialState()` prefers embedded state (`#state-data` JSON script tag) when running inside the artifact runtime, and falls back to `localStorage` otherwise, merged onto `defaultState()` so new fields added to `defaultState()` don't break old saved state.
 
 **Implication for edits**: because the shell template is a literal string copy of the document embedded inside itself, any change to the visible HTML/CSS/script must also be reflected in the `__NR_SHELL_TEMPLATE__` string (or regenerated) — the two are meant to stay in sync so self-republishing doesn't revert your changes. Check where `__NR_SHELL_TEMPLATE__` is assigned before hand-editing structural HTML/script content.
+
+## Login gate
+
+The site is deployed statically (no backend), so there's no real auth — `login.html` is a client-side email allowlist, meant only to stop casual/unauthorized access, not a security boundary (the allowlist is visible in the page source).
+
+- `login.html` holds `ALLOWED_EMAILS` (a plain array of authorized email addresses — edit this to add/remove people) and `AUTH_LS_KEY = "nr_painel_auth_v1"`. On submit it lowercases/trims the entered email, checks membership, and on match writes `{email, ts}` to `localStorage[AUTH_LS_KEY]` before redirecting to `index.html`. If a valid session already exists, it redirects straight to `index.html` instead of showing the form.
+- `index.html` has a tiny guard `<script>` as the very first thing inside `<body>` (before the visible header markup) that checks for that same `localStorage[AUTH_LS_KEY]` and does `location.replace("login.html")` if missing — this is what makes the gate actually enforced rather than decorative.
+- `index.html`'s guard does **not** re-check the email against `ALLOWED_EMAILS` — it only checks that a session was recorded. So removing an email from `ALLOWED_EMAILS` does not revoke devices that already logged in (their `localStorage` still has a session). That's an accepted tradeoff for this lightweight client-side gate, not a bug.
+- `login.html` intentionally does **not** reuse `index.html`'s base64 logo (`#logoImg`, set from a large embedded PNG in the main script) — it uses a plain text brand mark instead, to stay small. It does duplicate the relevant `:root` design tokens (colors, fonts, radius, shadow) so the two pages look consistent; if you restyle `index.html`'s palette, mirror the change here too since there's no shared CSS file between them.
 
 ## Working in this file
 
