@@ -1,0 +1,14 @@
+/* Estilos da tela de login (login.html). Tokens de cor/tipografia ficam em tokens.css. */
+*{box-sizing:border-box;}
+[hidden]{display:none!important;}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+.card{width:100%;max-width:360px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow);}
+.brand{font-family:var(--font-display);font-weight:600;font-size:19px;color:var(--verde-ink);margin:0 0 2px;}
+.sub{margin:0 0 22px;color:var(--text-soft);font-size:13.5px;}
+.field-label{font-size:12px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px;display:block;}
+input[type=email]{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;background:var(--bg);color:var(--text);font-family:inherit;font-size:14px;}
+input[type=email]:focus{outline:2px solid var(--verde);outline-offset:1px;}
+.btn{margin-top:14px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--verde);background:var(--verde);color:#fff;border-radius:999px;padding:11px 14px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.btn:hover{opacity:.92;}
+.error{margin-top:12px;display:flex;gap:8px;align-items:flex-start;background:var(--vermelho-suave);border:1px solid color-mix(in srgb, var(--vermelho) 40%, transparent);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text);}
+.error b{color:var(--vermelho);}

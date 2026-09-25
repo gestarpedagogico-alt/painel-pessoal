@@ -1,0 +1,37 @@
+/* Design tokens compartilhados entre index.html e login.html.
+   Qualquer mudança de paleta/tipografia/raio deve ser feita aqui. */
+:root{
+  color-scheme:light;
+  --bg:#F5F7F1; --surface:#FFFFFF; --surface-2:#EEF1E8; --border:#DFE4D6;
+  --text:#212A1C; --text-soft:#5B6455; --text-faint:#8B9382;
+  --verde:#2F4C36; --verde-suave:#E4ECE2; --verde-ink:#1C2E20;
+  --laranja:#D9822E; --laranja-suave:#FAEBD9;
+  --teal:#3E7C79; --teal-suave:#E2EEEC;
+  --amarelo:#D9A22C; --amarelo-suave:#FAF0D9;
+  --vermelho:#B4553E; --vermelho-suave:#F7E3DD;
+  --shadow:0 1px 2px rgba(30,38,24,.06), 0 8px 24px rgba(30,38,24,.06);
+  --radius:18px; --radius-sm:12px;
+  --font-display:'Fraunces',Georgia,serif; --font-body:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171D14; --surface:#20281B; --surface-2:#263020; --border:#37432E;
+    --text:#EBEEE3; --text-soft:#AEB89F; --text-faint:#7C8570;
+    --verde:#8FBC9B; --verde-suave:#26362A; --verde-ink:#DDEAE0;
+    --laranja:#F0A85E; --laranja-suave:#3A2C1B;
+    --teal:#7FC0BB; --teal-suave:#1E332F;
+    --amarelo:#F0C465; --amarelo-suave:#3A3018;
+    --vermelho:#E08268; --vermelho-suave:#3C241D;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171D14; --surface:#20281B; --surface-2:#263020; --border:#37432E;
+  --text:#EBEEE3; --text-soft:#AEB89F; --text-faint:#7C8570;
+  --verde:#8FBC9B; --verde-suave:#26362A; --verde-ink:#DDEAE0;
+  --laranja:#F0A85E; --laranja-suave:#3A2C1B;
+  --teal:#7FC0BB; --teal-suave:#1E332F;
+  --amarelo:#F0C465; --amarelo-suave:#3A3018;
+  --vermelho:#E08268; --vermelho-suave:#3C241D;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+}
